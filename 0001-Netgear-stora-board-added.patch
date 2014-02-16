@@ -1,0 +1,85 @@
+From bddd6b0e4c533a2d802cb20049e15c1087cf5f40 Mon Sep 17 00:00:00 2001
+From: Bryan McGuire <bryan.mcguire@gmail.com>
+Date: Tue, 23 Mar 2010 20:39:43 -0700
+Subject: [PATCH] Netgear stora board added
+
+---
+ MAKEALL                             |  1 +
+ Makefile                            |  3 +++
+ include/asm-arm/arch-kirkwood/mpp.h |  1 +
+ include/asm-arm/mach-types.h        | 14 ++++++++++++++
+ 4 files changed, 19 insertions(+)
+
+diff --git a/MAKEALL b/MAKEALL
+index 7827469..16eb5e7 100755
+--- a/MAKEALL
++++ b/MAKEALL
+@@ -578,6 +578,7 @@ LIST_ARM9="			\
+ 	omap730p2		\
+ 	openrd_base		\
+ 	rd6281a			\
++	netgear_ms2110		\
+ 	sbc2410x		\
+ 	scb9328			\
+ 	sheevaplug		\
+diff --git a/Makefile b/Makefile
+index 969011a..4b6e43e 100644
+--- a/Makefile
++++ b/Makefile
+@@ -3040,6 +3040,9 @@ omap730p2_cs3boot_config :	unconfig
+ rd6281a_config: unconfig
+ 	@$(MKCONFIG) $(@:_config=) arm arm926ejs $(@:_config=) Marvell kirkwood
+ 
++netgear_ms2110_config: unconfig
++	@$(MKCONFIG) $(@:_config=) arm arm926ejs $(@:_config=) Marvell kirkwood
++
+ sbc2410x_config: unconfig
+ 	@$(MKCONFIG) $(@:_config=) arm arm920t sbc2410x NULL s3c24x0
+ 
+diff --git a/include/asm-arm/arch-kirkwood/mpp.h b/include/asm-arm/arch-kirkwood/mpp.h
+index b3c090e..9ee1d5b 100644
+--- a/include/asm-arm/arch-kirkwood/mpp.h
++++ b/include/asm-arm/arch-kirkwood/mpp.h
+@@ -237,6 +237,7 @@
+ #define MPP34_GPIO		MPP( 34, 0x0, 1, 1, 0,   1,   1,   1    )
+ #define MPP34_TDM_SPI_CS1	MPP( 34, 0x2, 0, 1, 0,   0,   1,   1    )
+ #define MPP34_GE1_14		MPP( 34, 0x3, 0, 0, 0,   1,   1,   1    )
++#define MPP34_SATA1_ACTn	MPP( 34, 0x5, 0, 1, 0,   0,   1,   1    )
+ 
+ #define MPP35_GPIO		MPP( 35, 0x0, 1, 1, 1,   1,   1,   1    )
+ #define MPP35_TDM_CH0_TX_QL	MPP( 35, 0x2, 0, 1, 0,   0,   1,   1    )
+diff --git a/include/asm-arm/mach-types.h b/include/asm-arm/mach-types.h
+index 4622557..52101c7 100644
+--- a/include/asm-arm/mach-types.h
++++ b/include/asm-arm/mach-types.h
+@@ -2699,6 +2699,7 @@ extern unsigned int __machine_arch_type;
+ #define MACH_TYPE_MX53_EVK             2716
+ #define MACH_TYPE_IGEP0030             2717
+ #define MACH_TYPE_AXELL_H40_H50_CTRL   2718
++#define MACH_TYPE_NETGEAR_MS2110       2743
+ 
+ #ifdef CONFIG_ARCH_EBSA110
+ # ifdef machine_arch_type
+@@ -34948,6 +34949,19 @@ extern unsigned int __machine_arch_type;
+  * These have not yet been registered
+  */
+ 
++#ifdef CONFIG_MACH_NETGEAR_MS2110
++# ifdef machine_arch_type
++#  undef machine_arch_type
++#  define machine_arch_type	__machine_arch_type
++# else
++#  define machine_arch_type	MACH_TYPE_NETGEAR_MS2110
++# endif
++# define machine_is_netgear_ms2110()	(machine_arch_type == MACH_TYPE_NETGEAR_MS2110)
++#else
++# define machine_is_netgear_ms2110()	(0)
++#endif
++
++
+ #ifndef machine_arch_type
+ #define machine_arch_type	__machine_arch_type
+ #endif
+-- 
+1.8.3.2
+

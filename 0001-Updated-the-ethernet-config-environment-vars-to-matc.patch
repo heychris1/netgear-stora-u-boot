@@ -1,0 +1,69 @@
+From 2ddf1269955e3c34c1346451c142f27696c6cb31 Mon Sep 17 00:00:00 2001
+From: Bryan McGuire <bryan.mcguire@gmail.com>
+Date: Fri, 26 Mar 2010 21:10:01 -0700
+Subject: [PATCH] Updated the ethernet config; environment vars to match linux
+ partitioning
+
+---
+ include/configs/netgear_ms2110.h | 24 ++++++++++++------------
+ 1 file changed, 12 insertions(+), 12 deletions(-)
+
+diff --git a/include/configs/netgear_ms2110.h b/include/configs/netgear_ms2110.h
+index 791fd8a..3913884 100644
+--- a/include/configs/netgear_ms2110.h
++++ b/include/configs/netgear_ms2110.h
+@@ -70,7 +70,7 @@
+ #define CONFIG_SYS_BAUDRATE_TABLE	{ 9600, 19200, 38400, 57600, \
+ 					  115200,230400, 460800, 921600 }
+ /* auto boot */
+-#define CONFIG_BOOTDELAY	10	/* default enable autoboot */
++#define CONFIG_BOOTDELAY	3	/* default enable autoboot */
+ 
+ /*
+  * For booting Linux, the board info and command line data
+@@ -131,16 +131,16 @@
+  */
+ #define CONFIG_BOOTCOMMAND		"${x_bootcmd_kernel}; "	\
+ 	"setenv bootargs ${x_bootargs} ${x_bootargs_root}; "	\
+-	"${x_bootcmd_usb}; bootm 0x6400000;"
++	"${x_bootcmd_usb}; bootm 0x80000;"
+ 
+-#define CONFIG_MTDPARTS		"orion_nand:512k(uboot),"	\
+-	"3m@1m(kernel),1m@4m(psm),13m@5m(rootfs) rw\0"
++#define CONFIG_MTDPARTS		"orion_nand:1m(uboot),4m@1m(kernel)," \
++	"251m@5m(rootfs) rw\0"
+ 
+ #define CONFIG_EXTRA_ENV_SETTINGS	"x_bootargs=console"	\
+ 	"=ttyS0,115200 mtdparts="CONFIG_MTDPARTS	\
+-	"x_bootcmd_kernel=nand read 0x6400000 0x100000 0x300000\0" \
++	"x_bootcmd_kernel=nand read 0x80000 0x100000 0x400000\0" \
+ 	"x_bootcmd_usb=usb start\0" \
+-	"x_bootargs_root=root=/dev/mtdblock3 rw rootfstype=jffs2\0"
++	"x_bootargs_root=ubi.mtd=2 root=ubi0:rootfs rootfstype=ubifs\0"
+ 
+ /*
+  * Size of malloc() pool
+@@ -168,14 +168,14 @@
+  * Ethernet Driver configuration
+  */
+ #ifdef CONFIG_CMD_NET
+-#define CONFIG_NETCONSOLE	/* include NetConsole support */
+-#define CONFIG_NET_MULTI	/* specify more that one ports available */
+-#define CONFIG_MII		/* expose smi ove miiphy interface */
+-#define CONFIG_KIRKWOOD_EGIGA	/* Enable kirkwood Gbe Controller Driver */
+-#define CONFIG_KIRKWOOD_EGIGA_PORTS	{1,0}	/* enable first port */
++#define CONFIG_NETCONSOLE      /* include NetConsole support */
++#define CONFIG_NET_MULTI       /* specify more that one ports available */
++#define CONFIG_MII             /* expose smi ove miiphy interface */
++#define CONFIG_KIRKWOOD_EGIGA  /* Enable kirkwood Gbe Controller Driver */
++#define CONFIG_KIRKWOOD_EGIGA_PORTS    {1,0}   /* enable first port */
+ #define CONFIG_MV88E61XX_MULTICHIP_ADRMODE
+ #define CONFIG_DIS_AUTO_NEG_SPEED_GMII /*Disable Auto speed negociation */
+-#define CONFIG_PHY_SPEED	_1000BASET	/*Force PHYspeed to 1GBPs */
++#define CONFIG_PHY_SPEED       _1000BASET      /*Force PHYspeed to 1GBPs */
+ #define CONFIG_PHY_BASE_ADR	0x0A
+ #define CONFIG_ENV_OVERWRITE	/* ethaddr can be reprogrammed */
+ #define CONFIG_RESET_PHY_R	/* use reset_phy() to init PHY */
+-- 
+1.8.3.2
+
