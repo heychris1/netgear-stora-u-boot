@@ -1,0 +1,336 @@
+Sending boot message. Please reboot the target...-
+Sending boot image...
+  0 % [......................................................................]
+  1 % [......................................................................]
+  3 % [......................................................................]
+  5 % [......................................................................]
+  6 % [......................................................................]
+  8 % [......................................................................]
+ 10 % [......................................................................]
+ 11 % [......................................................................]
+ 13 % [......................................................................]
+ 15 % [......................................................................]
+ 17 % [......................................................................]
+ 18 % [......................................................................]
+ 20 % [......................................................................]
+ 22 % [......................................................................]
+ 23 % [......................................................................]
+ 25 % [......................................................................]
+ 27 % [......................................................................]
+ 29 % [......................................................................]
+ 30 % [......................................................................]
+ 32 % [......................................................................]
+ 34 % [......................................................................]
+ 35 % [......................................................................]
+ 37 % [......................................................................]
+ 39 % [......................................................................]
+ 41 % [......................................................................]
+ 42 % [......................................................................]
+ 44 % [......................................................................]
+ 46 % [......................................................................]
+ 47 % [......................................................................]
+ 49 % [......................................................................]
+ 51 % [......................................................................]
+ 53 % [......................................................................]
+ 54 % [......................................................................]
+ 56 % [......................................................................]
+ 58 % [......................................................................]
+ 59 % [......................................................................]
+ 61 % [......................................................................]
+ 63 % [......................................................................]
+ 64 % [......................................................................]
+ 66 % [......................................................................]
+ 68 % [......................................................................]
+ 70 % [......................................................................]
+ 71 % [......................................................................]
+ 73 % [......................................................................]
+ 75 % [......................................................................]
+ 76 % [......................................................................]
+ 78 % [......................................................................]
+ 80 % [......................................................................]
+ 82 % [......................................................................]
+ 83 % [......................................................................]
+ 85 % [......................................................................]
+ 87 % [......................................................................]
+ 88 % [......................................................................]
+ 90 % [......................................................................]
+ 92 % [......................................................................]
+ 94 % [......................................................................]
+ 95 % [......................................................................]
+ 97 % [......................................................................]
+ 99 % [....................................]
+[Type Ctrl-\ + c to quit]
+
+
+
+U-Boot 2013.10 (Feb 16 2014 - 12:24:16)-tld-2
+Netgear-MS2110
+
+SoC:   Kirkwood 88F6281_A1
+DRAM:  128 MiB
+WARNING: Caches not enabled
+NAND:  256 MiB
+In:    serial
+Out:   serial
+Err:   serial
+Net:   egiga0
+PHY reset timed out
+88E1116 Initialized on egiga0
+Hit any key to stop autoboot:  0 
+Netgear Stora>  printenv
+arcNumber=2097
+baudrate=115200
+bootcmd=usb start; run force_rescue_bootcmd; run ubifs_bootcmd; run usb_bootcmd; usb stop; run rescue_bootcmd; run pogo_bootcmd; reset
+bootdelay=3
+console=ttyS0,115200
+ethact=egiga0
+ethaddr=c0:3f:0e:45:70:ec
+fileaddr=800000
+filesize=80000
+force_rescue=0
+force_rescue_bootcmd=if test $force_rescue -eq 1 || ext2load usb 0:1 0x1700000 /rescueme 1 || fatload usb 0:1 0x1700000 /rescueme.txt 1; then run rescue_bootcmd; fi
+ipaddr=192.168.2.234
+led_error=orange blinking
+led_exit=green off
+led_init=green blinking
+machid=c11
+mainlineLinux=yes
+mtdids=nand0=orion_nand
+mtdparts=mtdparts=orion_nand:1M(u-boot),4M(uImage),32M(rootfs),-(data)
+partition=nand0,2
+pogo_bootcmd=if fsload uboot-original-mtd0.kwb; then go 0x800200; fi
+rescue_bootcmd=if test $rescue_installed -eq 1; then run rescue_set_bootargs; nand read.e 0x800000 0x100000 0x400000; bootm 0x800000; else run pogo_bootcmd; fi
+rescue_installed=0
+rescue_set_bootargs=setenv bootargs console=$console ubi.mtd=2 root=ubi0:rootfs ro rootfstype=ubifs $mtdparts $rescue_custom_params
+serverip=192.168.2.65
+stderr=serial
+stdin=serial
+stdout=serial
+ubifs_bootcmd=run ubifs_set_bootargs; if ubi part data && ubifsmount rootfs && ubifsload 0x800000 /boot/uImage && ubifsload 0x1100000 /boot/uInitrd; then bootm 0x800000 0x1100000; fi
+ubifs_mtd=3
+ubifs_set_bootargs=setenv bootargs console=$console ubi.mtd=$ubifs_mtd root=ubi0:rootfs rootfstype=ubifs $mtdparts $ubifs_custom_params
+usb_boot=mw 0x800000 0 1; ext2load usb $usb_device 0x800000 /boot/uImage; if ext2load usb $usb_device 0x1100000 /boot/uInitrd; then bootm 0x800000 0x1100000; else bootm 0x800000; fi
+usb_bootcmd=run usb_init; run usb_set_bootargs; run usb_boot
+usb_device=0:1
+usb_init=run usb_scan
+usb_root=/dev/sda1
+usb_rootdelay=10
+usb_rootfstype=ext3
+usb_scan=usb_scan_done=0;for scan in $usb_scan_list; do run usb_scan_$scan; if test $usb_scan_done -eq 0 && ext2load usb $usb 0x800000 /boot/uImage 1; then usb_scan_done=1; echo "Found bootable drive on usb $usb"; setenv usb_device $usb; setenv usb_root /dev/$dev; fi; done
+usb_scan_1=usb=0:1 dev=sda1
+usb_scan_2=usb=1:1 dev=sdb1
+usb_scan_3=usb=2:1 dev=sdc1
+usb_scan_4=usb=3:1 dev=sdd1
+usb_scan_list=1 2 3 4
+usb_set_bootargs=setenv bootargs console=$console root=$usb_root rootdelay=$usb_rootdelay rootfstype=$usb_rootfstype $mtdparts $usb_custom_params
+x_bootargs=console=ttyS0,115200 mtdparts=orion_nand:1m(uboot),4m@1m(kernel),251m@5m(rootfs) rw
+x_bootargs_root=ubi.mtd=2 root=ubi0:rootfs rootfstype=ubifs
+x_bootcmd_kernel=nand read 0x80000 0x100000 0x400000
+x_bootcmd_usb=usb start
+
+Environment size: 2677/131068 bytes
+Netgear Stora> run boot
+  bootcmd bootdelay
+Netgear Stora> run bootcmd
+(Re)start USB...
+USB0:   USB EHCI 1.00
+scanning bus 0 for devices... 2 USB Device(s) found
+       scanning usb for storage devices... 1 Storage Device(s) found
+** File not found /rescueme **
+** Unrecognized filesystem type **
+UBI: attaching mtd1 to ubi0
+UBI: physical eraseblock size:   131072 bytes (128 KiB)
+UBI: logical eraseblock size:    129024 bytes
+UBI: smallest flash I/O unit:    2048
+UBI: sub-page size:              512
+UBI: VID header offset:          512 (aligned 512)
+UBI: data offset:                2048
+UBI error: vtbl_check: volume table check failed: record 0, error 9
+UBI error: ubi_init: cannot attach mtd1
+UBI error: ubi_init: UBI error: cannot initialize UBI, error -22
+UBI init error 22
+1 bytes read in 145 ms (0 Bytes/s)
+Found bootable drive on usb 0:1
+2399792 bytes read in 218 ms (10.5 MiB/s)
+EHCI timed out on TD - token=0xc0008d80
+EHCI timed out on TD - token=0x80008d80
+EHCI timed out on TD - token=0x80008d80
+EHCI timed out on TD - token=0x40008d80
+EHCI timed out on TD - token=0x80008d80
+EHCI timed out on TD - token=0x80008d80
+EHCI timed out on TD - token=0x40008d80
+EHCI timed out on TD - token=0x80008d80
+EHCI timed out on TD - token=0x80008d80
+ ** ext4fs_devread read error - block
+## Booting kernel from Legacy Image at 00800000 ...
+   Image Name:   Linux-3.13.1-kirkwood-tld-2
+   Created:      2014-02-05  19:30:49 UTC
+   Image Type:   ARM Linux Kernel Image (uncompressed)
+   Data Size:    2399728 Bytes = 2.3 MiB
+   Load Address: 00008000
+   Entry Point:  00008000
+   Verifying Checksum ... OK
+   Loading Kernel Image ... OK
+Using machid 0xc11 from environment
+
+Starting kernel ...
+
+Uncompressing Linux... done, booting the kernel.
+[    0.000000] Booting Linux on physical CPU 0x0
+[    0.000000] Initializing cgroup subsys cpuset
+[    0.000000] Initializing cgroup subsys cpu
+[    0.000000] Initializing cgroup subsys cpuacct
+[    0.000000] Linux version 3.13.1-kirkwood-tld-2 (root@tldDebian) (gcc version 4.6.3 (Debian 4.6.3-14) ) #1 PREEMPT Tue Feb 4 03:19:07 PST 2014
+[    0.000000] CPU: Feroceon 88FR131 [56251311] revision 1 (ARMv5TE), cr=00053977
+[    0.000000] CPU: VIVT data cache, VIVT instruction cache
+[    0.000000] Machine: Seagate GoFlex Net
+[    0.000000] Memory policy: Data cache writeback
+[    0.000000] Built 1 zonelists in Zone order, mobility grouping on.  Total pages: 32512
+[    0.000000] Kernel command line: console=ttyS0,115200 root=/dev/sda1 rootdelay=10 rootfstype=ext3 mtdparts=orion_nand:1M(u-boot),4M(uImage),32M(rootfs),-(data)
+[    0.000000] PID hash table entries: 512 (order: -1, 2048 bytes)
+[    0.000000] Dentry cache hash table entries: 16384 (order: 4, 65536 bytes)
+[    0.000000] Inode-cache hash table entries: 8192 (order: 3, 32768 bytes)
+[    0.000000] Memory: 122636K/131072K available (4659K kernel code, 346K rwdata, 1588K rodata, 211K init, 425K bss, 8436K reserved)
+[    0.000000] Virtual kernel memory layout:
+[    0.000000]     vector  : 0xffff0000 - 0xffff1000   (   4 kB)
+[    0.000000]     fixmap  : 0xfff00000 - 0xfffe0000   ( 896 kB)
+[    0.000000]     vmalloc : 0xc8800000 - 0xff000000   ( 872 MB)
+[    0.000000]     lowmem  : 0xc0000000 - 0xc8000000   ( 128 MB)
+[    0.000000]     modules : 0xbf000000 - 0xc0000000   (  16 MB)
+[    0.000000]       .text : 0xc0008000 - 0xc06220ac   (6249 kB)
+[    0.000000]       .init : 0xc0623000 - 0xc0657e4c   ( 212 kB)
+[    0.000000]       .data : 0xc0658000 - 0xc06ae824   ( 347 kB)
+[    0.000000]        .bss : 0xc06ae824 - 0xc0718d6c   ( 426 kB)
+[    0.000000] Preemptible hierarchical RCU implementation.
+[    0.000000] NR_IRQS:114
+[    0.000000] sched_clock: 32 bits at 200MHz, resolution 5ns, wraps every 21474836475ns
+[    0.000000] Console: colour dummy device 80x30
+[    8.658510] Calibrating delay loop... 990.41 BogoMIPS (lpj=4952064)
+[    8.748233] pid_max: default: 32768 minimum: 301
+[    8.748359] Security Framework initialized
+[    8.748447] Mount-cache hash table entries: 512
+[    8.749211] Initializing cgroup subsys devices
+[    8.749241] Initializing cgroup subsys freezer
+[    8.749259] Initializing cgroup subsys net_cls
+[    8.749272] Initializing cgroup subsys blkio
+[    8.749376] CPU: Testing write buffer coherency: ok
+[    8.749837] Setting up static identity map for 0x469248 - 0x469284
+[    8.752409] devtmpfs: initialized
+[    8.755348] prandom: seed boundary self test passed
+[    8.760273] prandom: 100 self tests passed
+[    8.760295] pinctrl core: initialized pinctrl subsystem
+[    8.760686] regulator-dummy: no parameters
+[    8.761083] NET: Registered protocol family 16
+[    8.761613] DMA: preallocated 256 KiB pool for atomic coherent allocations
+[    8.762350] cpuidle: using governor ladder
+[    8.762371] cpuidle: using governor menu
+[    8.762510] Kirkwood: MV88F6281-A1, TCLK=200000000.
+[    8.762536] Feroceon L2: Enabling L2
+[    8.762583] Feroceon L2: Cache support initialised.
+[    8.767410] bio: create slab <bio-0> at 0
+[    8.767936] vgaarb: loaded
+[    8.768246] usbcore: registered new interface driver usbfs
+[    8.768313] usbcore: registered new interface driver hub
+[    8.768439] usbcore: registered new device driver usb
+[    8.769171] Switched to clocksource orion_clocksource
+[    8.793602] NET: Registered protocol family 2
+[    8.794359] TCP established hash table entries: 1024 (order: 0, 4096 bytes)
+[    8.794389] TCP bind hash table entries: 1024 (order: 0, 4096 bytes)
+[    8.794413] TCP: Hash tables configured (established 1024 bind 1024)
+[    8.794491] TCP: reno registered
+[    8.794508] UDP hash table entries: 256 (order: 0, 4096 bytes)
+[    8.794534] UDP-Lite hash table entries: 256 (order: 0, 4096 bytes)
+[    8.794775] NET: Registered protocol family 1
+[    8.795160] RPC: Registered named UNIX socket transport module.
+[    8.795175] RPC: Registered udp transport module.
+[    8.795183] RPC: Registered tcp transport module.
+[    8.795191] RPC: Registered tcp NFSv4.1 backchannel transport module.
+[    8.795587] NetWinder Floating Point Emulator V0.97 (double precision)
+[    8.796244] audit: initializing netlink socket (disabled)
+[    8.796292] type=2000 audit(0.130:1): initialized
+[    8.797165] zbud: loaded
+[    8.797363] VFS: Disk quotas dquot_6.5.2
+[    8.797422] Dquot-cache hash table entries: 1024 (order 0, 4096 bytes)
+[    8.797842] NFS: Registering the id_resolver key type
+[    8.797919] Key type id_resolver registered
+[    8.797931] Key type id_legacy registered
+[    8.797952] nfs4filelayout_init: NFSv4 File Layout Driver Registering...
+[    8.797963] Installing knfsd (copyright (C) 1996 okir@monad.swb.de).
+[    8.798167] jffs2: version 2.2. (NAND) (SUMMARY)  © 2001-2006 Red Hat, Inc.
+[    8.798502] msgmni has been set to 239
+[    8.798641] Key type big_key registered
+[    8.800828] alg: No test for stdrng (krng)
+[    8.800937] Block layer SCSI generic (bsg) driver version 0.4 loaded (major 252)
+[    8.800951] io scheduler noop registered
+[    8.800961] io scheduler deadline registered
+[    8.800989] io scheduler cfq registered (default)
+[    8.801227] mv_xor mv_xor.0: Marvell shared XOR driver
+[    8.839279] mv_xor mv_xor.0: Marvell XOR: ( xor cpy )
+[    8.879239] mv_xor mv_xor.0: Marvell XOR: ( xor cpy )
+[    8.879362] mv_xor mv_xor.1: Marvell shared XOR driver
+[    8.919247] mv_xor mv_xor.1: Marvell XOR: ( xor cpy )
+[    8.959244] mv_xor mv_xor.1: Marvell XOR: ( xor cpy )
+[    8.959559] Serial: 8250/16550 driver, 2 ports, IRQ sharing disabled
+[    8.980192] serial8250.0: ttyS0 at MMIO 0xf1012000 (irq = 33, base_baud = 12500000) is a 16550A
+[    9.498657] console [ttyS0] enabled
+[    9.503143] NAND device: Manufacturer ID: 0xec, Chip ID: 0xda (Samsung NAND 256MiB 3,3V 8-bit)
+[    9.511828] NAND device: 256MiB, SLC, page size: 2048, OOB size: 64
+[    9.518131] Scanning device for bad blocks
+[    9.529331] Bad eraseblock 66 at 0x000000840000
+[    9.557373] Bad eraseblock 289 at 0x000002420000
+[    9.704748] Bad eraseblock 1640 at 0x00000cd00000
+[    9.752494] 4 cmdlinepart partitions found on MTD device orion_nand
+[    9.758789] Creating 4 MTD partitions on "orion_nand":
+[    9.763976] 0x000000000000-0x000000100000 : "u-boot"
+[    9.769276] 0x000000100000-0x000000500000 : "uImage"
+[    9.774510] 0x000000500000-0x000002500000 : "rootfs"
+[    9.779831] 0x000002500000-0x000010000000 : "data"
+[    9.785723] libphy: Fixed MDIO Bus: probed
+[    9.796099] libphy: orion_mdio_bus: probed
+[    9.800340] mv643xx_eth: MV-643xx 10/100/1000 ethernet driver version 1.4
+[    9.807274] libphy: PHY orion-mdio-mii:00 not found
+[    9.812251] platform mv643xx_eth_port.0: Driver mv643xx_eth_port requests probe deferral
+[    9.820593] ehci_hcd: USB 2.0 'Enhanced' Host Controller (EHCI) Driver
+[    9.827154] ehci-pci: EHCI PCI platform driver
+[    9.831738] ehci-orion: EHCI orion driver
+[    9.835831] orion-ehci orion-ehci.0: EHCI Host Controller
+[    9.841327] orion-ehci orion-ehci.0: new USB bus registered, assigned bus number 1
+[    9.849067] orion-ehci orion-ehci.0: irq 19, io mem 0xf1050000
+[    9.869211] orion-ehci orion-ehci.0: USB 2.0 started, EHCI 1.00
+[    9.875373] usb usb1: New USB device found, idVendor=1d6b, idProduct=0002
+[    9.882225] usb usb1: New USB device strings: Mfr=3, Product=2, SerialNumber=1
+[    9.889506] usb usb1: Product: EHCI Host Controller
+[    9.894413] usb usb1: Manufacturer: Linux 3.13.1-kirkwood-tld-2 ehci_hcd
+[    9.901164] usb usb1: SerialNumber: orion-ehci.0
+[    9.906331] hub 1-0:1.0: USB hub found
+[    9.910169] hub 1-0:1.0: 1 port detected
+[    9.914668] mousedev: PS/2 mouse device common for all mice
+[   10.229238] usb 1-1: new high-speed USB device number 2 using orion-ehci
+[   10.380955] usb 1-1: New USB device found, idVendor=13fe, idProduct=5200
+[   10.387708] usb 1-1: New USB device strings: Mfr=1, Product=2, SerialNumber=3
+[   10.394914] usb 1-1: Product: Patriot Memory
+[   10.399224] usb 1-1: Manufacturer:         
+[   10.403426] usb 1-1: SerialNumber: 070136AC2CB2F907
+[   10.929210] rtc-mv rtc-mv: internal RTC not ticking
+[   10.934225] i2c /dev entries driver
+[   10.938873] drop_monitor: Initializing network drop monitor service
+[   10.945418] TCP: cubic registered
+[   10.948758] NET: Registered protocol family 17
+[   10.953410] Key type dns_resolver registered
+[   10.958233] registered taskstats version 1
+[   10.963164] libphy: PHY orion-mdio-mii:00 not found
+[   10.968095] platform mv643xx_eth_port.0: Driver mv643xx_eth_port requests probe deferral
+[   10.976490] drivers/rtc/hctosys.c: unable to open rtc device (rtc0)
+[   10.983154] Waiting 10 sec before mounting root device...
+[   20.989831] VFS: Cannot open root device "sda1" or unknown-block(0,0): error -19
+[   20.997263] Please append a correct "root=" boot option; here are the available partitions:
+[   21.005705] Kernel panic - not syncing: VFS: Unable to mount root fs on unknown-block(0,0)
+[   21.014011] CPU: 0 PID: 1 Comm: swapper Not tainted 3.13.1-kirkwood-tld-2 #1
+[   21.021123] [<c00141a4>] (unwind_backtrace+0x0/0xe0) from [<c0010d10>] (show_stack+0x10/0x14)
+[   21.029707] [<c0010d10>] (show_stack+0x10/0x14) from [<c0461b6c>] (panic+0x80/0x1e4)
+[   21.037504] [<c0461b6c>] (panic+0x80/0x1e4) from [<c0623ff8>] (mount_block_root+0x1fc/0x240)
+[   21.045996] [<c0623ff8>] (mount_block_root+0x1fc/0x240) from [<c0624120>] (mount_root+0xe4/0x10c)
+[   21.054916] [<c0624120>] (mount_root+0xe4/0x10c) from [<c062426c>] (prepare_namespace+0x124/0x184)
+[   21.063924] [<c062426c>] (prepare_namespace+0x124/0x184) from [<c0623c28>] (kernel_init_freeable+0x1f8/0x240)
+[   21.073890] [<c0623c28>] (kernel_init_freeable+0x1f8/0x240) from [<c045fdd8>] (kernel_init+0x8/0x100)
+[   21.083158] [<c045fdd8>] (kernel_init+0x8/0x100) from [<c000dff0>] (ret_from_fork+0x14/0x24)
