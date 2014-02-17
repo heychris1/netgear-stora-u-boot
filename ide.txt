@@ -1,0 +1,59 @@
+Netgear Stora> ide reset
+
+Reset IDE: Bus 0: ide_outb (dev= 0, port= 0x118, val= 0xe0) : @ 0xf1082118
+ide_inb (dev= 0, port= 0x11c) : @ 0xf108211c -> 0x50
+OK Bus 1: ide_outb (dev= 1, port= 0x118, val= 0xf0) : @ 0xf1084118
+ide_inb (dev= 1, port= 0x11c) : @ 0xf108411c -> 0x7f
+not available  Status = 0x7F 
+  Device 0: ide_outb (dev= 0, port= 0x118, val= 0xe0) : @ 0xf1082118
+ide_outb (dev= 0, port= 0x11c, val= 0xec) : @ 0xf108211c
+ide_inb (dev= 0, port= 0x11c) : @ 0xf108211c -> 0xd0
+ide_inb (dev= 0, port= 0x11c) : @ 0xf108211c -> 0x58
+IDE_TIME_OUT defined as= 2000ide_wait status=88 ATA_STAT_DRQ=8 ATA_STAT_FAULT=32  ATA_STAT_ERR=1in input data base for read is f1082100
+DEBUG> Model: TS130613A8 S Firm: CC83 Ser#: V98M5Y4Z
+
+Model: ST3160318AS  Firm: CC38 Ser#: 9VM8Y5Z4
+            Type: Hard Disk
+            Supports 48-bit addressing
+            Capacity: 152627.8 MB = 149.0 GB (312581808 x 512)
+ide_read dev 0 start 0, blocks 1 buffer at 7B21B80
+ide_outb (dev= 0, port= 0x118, val= 0xe0) : @ 0xf1082118
+ide_inb (dev= 0, port= 0x11c) : @ 0xf108211c -> 0x50
+ide_outb (dev= 0, port= 0x11c, val= 0xe5) : @ 0xf108211c
+ide_inb (dev= 0, port= 0x11c) : @ 0xf108211c -> 0xd0
+ide_inb (dev= 0, port= 0x11c) : @ 0xf108211c -> 0x50
+ide_inb (dev= 0, port= 0x108) : @ 0xf1082108 -> 0xff
+Powersaving FF
+ide_inb (dev= 0, port= 0x11c) : @ 0xf108211c -> 0x50
+ide_outb (dev= 0, port= 0x108, val= 0x01) : @ 0xf1082108
+ide_outb (dev= 0, port= 0x10c, val= 0x00) : @ 0xf108210c
+ide_outb (dev= 0, port= 0x110, val= 0x00) : @ 0xf1082110
+ide_outb (dev= 0, port= 0x114, val= 0x00) : @ 0xf1082114
+ide_outb (dev= 0, port= 0x118, val= 0xe0) : @ 0xf1082118
+ide_outb (dev= 0, port= 0x11c, val= 0x20) : @ 0xf108211c
+ide_inb (dev= 0, port= 0x11c) : @ 0xf108211c -> 0xd0
+ide_inb (dev= 0, port= 0x11c) : @ 0xf108211c -> 0xd0
+ide_inb (dev= 0, port= 0x11c) : @ 0xf108211c -> 0xd0
+ide_inb (dev= 0, port= 0x11c) : @ 0xf108211c -> 0xd0
+ide_inb (dev= 0, port= 0x11c) : @ 0xf108211c -> 0xd0
+ide_inb (dev= 0, port= 0x11c) : @ 0xf108211c -> 0x58
+in input data base for read is f1082100
+ide_inb (dev= 0, port= 0x11c) : @ 0xf108211c -> 0x50
+Netgear Stora> ide init
+ide - IDE sub-system
+
+Usage:
+ide reset - reset IDE controller
+ide info  - show available IDE devices
+ide device [dev] - show or set current device
+ide part [dev] - print partition table of one or all IDE devices
+ide read  addr blk# cnt
+ide write addr blk# cnt - read/write `cnt' blocks starting at block `blk#'
+    to/from memory address `addr'
+Netgear Stora> ide info
+
+IDE device 0: Model: ST3160318AS  Firm: CC38 Ser#: 9VM8Y5Z4
+            Type: Hard Disk
+            Supports 48-bit addressing
+            Capacity: 152627.8 MB = 149.0 GB (312581808 x 512)
+Netgear Stora> 
