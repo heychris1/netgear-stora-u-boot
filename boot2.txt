@@ -1,0 +1,266 @@
+
+root@debian:/home/useruser/kwboot-tool# 
+root@debian:/home/useruser/kwboot-tool# ./uart.sh 
+Sending boot message. Please reboot the target...-
+Sending boot image...
+  0 % [......................................................................]
+  1 % [......................................................................]
+  3 % [......................................................................]
+  5 % [......................................................................]
+  6 % [......................................................................]
+  8 % [......................................................................]
+ 10 % [......................................................................]
+ 11 % [......................................................................]
+ 13 % [......................................................................]
+ 15 % [......................................................................]
+ 17 % [......................................................................]
+ 18 % [......................................................................]
+ 20 % [......................................................................]
+ 22 % [......................................................................]
+ 23 % [......................................................................]
+ 25 % [......................................................................]
+ 27 % [......................................................................]
+ 29 % [......................................................................]
+ 30 % [......................................................................]
+ 32 % [......................................................................]
+ 34 % [......................................................................]
+ 35 % [......................................................................]
+ 37 % [......................................................................]
+ 39 % [......................................................................]
+ 41 % [......................................................................]
+ 42 % [......................................................................]
+ 44 % [......................................................................]
+ 46 % [......................................................................]
+ 47 % [......................................................................]
+ 49 % [......................................................................]
+ 51 % [......................................................................]
+ 53 % [......................................................................]
+ 54 % [......................................................................]
+ 56 % [......................................................................]
+ 58 % [......................................................................]
+ 59 % [......................................................................]
+ 61 % [......................................................................]
+ 63 % [......................................................................]
+ 64 % [......................................................................]
+ 66 % [......................................................................]
+ 68 % [......................................................................]
+ 70 % [......................................................................]
+ 71 % [......................................................................]
+ 73 % [......................................................................]
+ 75 % [......................................................................]
+ 76 % [......................................................................]
+ 78 % [......................................................................]
+ 80 % [......................................................................]
+ 82 % [......................................................................]
+ 83 % [......................................................................]
+ 85 % [......................................................................]
+ 87 % [......................................................................]
+ 88 % [......................................................................]
+ 90 % [......................................................................]
+ 92 % [......................................................................]
+ 94 % [......................................................................]
+ 95 % [......................................................................]
+ 97 % [......................................................................]
+ 99 % [........... .........................]
+[Type Ctrl-\ + c to quit]
+
+
+
+U-Boot 2013.10 (Feb 16 2014 - 12:24:16)-tld-2
+Netgear-MS2110
+
+SoC:   Kirkwood 88F6281_A1
+DRAM:  128 MiB
+WARNING: Caches not enabled
+NAND:  256 MiB
+In:    serial
+Out:   serial
+Err:   serial
+Net:   egiga0
+PHY reset timed out
+88E1116 Initialized on egiga0
+Hit any key to stop autoboot:  0 
+Netgear Stora>   printenv
+arcNumber=2743
+baudrate=115200
+bootcmd=usb start; run force_rescue_bootcmd; run ubifs_bootcmd; run usb_bootcmd; usb stop; run rescue_bootcmd; run pogo_bootcmd; reset
+bootdelay=3
+console=ttyS0,115200
+ethact=egiga0
+ethaddr=c0:3f:0e:45:70:ec
+fileaddr=800000
+filesize=80000
+force_rescue=0
+force_rescue_bootcmd=if test $force_rescue -eq 1 || ext2load usb 0:1 0x1700000 /rescueme 1 || fatload usb 0:1 0x1700000 /rescueme.txt 1; then run rescue_bootcmd; fi
+ipaddr=192.168.2.234
+led_error=orange blinking
+led_exit=green off
+led_init=green blinking
+mainlineLinux=yes
+mtdids=nand0=orion_nand
+mtdparts=mtdparts=orion_nand:1M(u-boot),4M(uImage),32M(rootfs),-(data)
+partition=nand0,2
+pogo_bootcmd=if fsload uboot-original-mtd0.kwb; then go 0x800200; fi
+rescue_bootcmd=if test $rescue_installed -eq 1; then run rescue_set_bootargs; nand read.e 0x800000 0x100000 0x400000; bootm 0x800000; else run pogo_bootcmd; fi
+rescue_installed=0
+rescue_set_bootargs=setenv bootargs console=$console ubi.mtd=2 root=ubi0:rootfs ro rootfstype=ubifs $mtdparts $rescue_custom_params
+serverip=192.168.2.65
+stderr=serial
+stdin=serial
+stdout=serial
+ubifs_bootcmd=run ubifs_set_bootargs; if ubi part data && ubifsmount rootfs && ubifsload 0x800000 /boot/uImage && ubifsload 0x1100000 /boot/uInitrd; then bootm 0x800000 0x1100000; fi
+ubifs_mtd=3
+ubifs_set_bootargs=setenv bootargs console=$console ubi.mtd=$ubifs_mtd root=ubi0:rootfs rootfstype=ubifs $mtdparts $ubifs_custom_params
+usb_boot=mw 0x800000 0 1; ext2load usb $usb_device 0x800000 /boot/uImage; if ext2load usb $usb_device 0x1100000 /boot/uInitrd; then bootm 0x800000 0x1100000; else bootm 0x800000; fi
+usb_bootcmd=run usb_init; run usb_set_bootargs; run usb_boot
+usb_device=0:1
+usb_init=run usb_scan
+usb_root=/dev/sda1
+usb_rootdelay=10
+usb_rootfstype=ext3
+usb_scan=usb_scan_done=0;for scan in $usb_scan_list; do run usb_scan_$scan; if test $usb_scan_done -eq 0 && ext2load usb $usb 0x800000 /boot/uImage 1; then usb_scan_done=1; echo "Found bootable drive on usb $usb"; setenv usb_device $usb; setenv usb_root /dev/$dev; fi; done
+usb_scan_1=usb=0:1 dev=sda1
+usb_scan_2=usb=1:1 dev=sdb1
+usb_scan_3=usb=2:1 dev=sdc1
+usb_scan_4=usb=3:1 dev=sdd1
+usb_scan_list=1 2 3 4
+usb_set_bootargs=setenv bootargs console=$console root=$usb_root rootdelay=$usb_rootdelay rootfstype=$usb_rootfstype $mtdparts $usb_custom_params
+x_bootargs=console=ttyS0,115200 mtdparts=orion_nand:1m(uboot),4m@1m(kernel),251m@5m(rootfs) rw
+x_bootargs_root=ubi.mtd=2 root=ubi0:rootfs rootfstype=ubifs
+x_bootcmd_kernel=nand read 0x80000 0x100000 0x400000
+x_bootcmd_usb=usb start
+
+Environment size: 2664/131068 bytes
+Netgear Stora>  tftpboot 0x200000 uImage
+Using egiga0 device
+TFTP from server 192.168.2.65; our IP address is 192.168.2.234
+Filename 'uImage'.
+Load address: 0x200000
+Loading: #################################################################
+         ##################################
+         5.1 MiB/s
+done
+Bytes transferred = 1445784 (160f98 hex)
+Netgear Stora> tftpboot 0x800000 uInitrd
+Using egiga0 device
+TFTP from server 192.168.2.65; our IP address is 192.168.2.234
+Filename 'uInitrd'.
+Load address: 0x800000
+Loading: #################################################################
+         #################################################################
+         #################################################################
+         #################################################################
+         #################################################################
+         ################################
+         5.7 MiB/s
+done
+Bytes transferred = 5236023 (4fe537 hex)
+Netgear Stora> printenv
+arcNumber=2743
+baudrate=115200
+bootcmd=usb start; run force_rescue_bootcmd; run ubifs_bootcmd; run usb_bootcmd; usb stop; run rescue_bootcmd; run pogo_bootcmd; reset
+bootdelay=3
+console=ttyS0,115200
+ethact=egiga0
+ethaddr=c0:3f:0e:45:70:ec
+fileaddr=800000
+filesize=4fe537
+force_rescue=0
+force_rescue_bootcmd=if test $force_rescue -eq 1 || ext2load usb 0:1 0x1700000 /rescueme 1 || fatload usb 0:1 0x1700000 /rescueme.txt 1; then run rescue_bootcmd; fi
+ipaddr=192.168.2.234
+led_error=orange blinking
+led_exit=green off
+led_init=green blinking
+mainlineLinux=yes
+mtdids=nand0=orion_nand
+mtdparts=mtdparts=orion_nand:1M(u-boot),4M(uImage),32M(rootfs),-(data)
+partition=nand0,2
+pogo_bootcmd=if fsload uboot-original-mtd0.kwb; then go 0x800200; fi
+rescue_bootcmd=if test $rescue_installed -eq 1; then run rescue_set_bootargs; nand read.e 0x800000 0x100000 0x400000; bootm 0x800000; else run pogo_bootcmd; fi
+rescue_installed=0
+rescue_set_bootargs=setenv bootargs console=$console ubi.mtd=2 root=ubi0:rootfs ro rootfstype=ubifs $mtdparts $rescue_custom_params
+serverip=192.168.2.65
+stderr=serial
+stdin=serial
+stdout=serial
+ubifs_bootcmd=run ubifs_set_bootargs; if ubi part data && ubifsmount rootfs && ubifsload 0x800000 /boot/uImage && ubifsload 0x1100000 /boot/uInitrd; then bootm 0x800000 0x1100000; fi
+ubifs_mtd=3
+ubifs_set_bootargs=setenv bootargs console=$console ubi.mtd=$ubifs_mtd root=ubi0:rootfs rootfstype=ubifs $mtdparts $ubifs_custom_params
+usb_boot=mw 0x800000 0 1; ext2load usb $usb_device 0x800000 /boot/uImage; if ext2load usb $usb_device 0x1100000 /boot/uInitrd; then bootm 0x800000 0x1100000; else bootm 0x800000; fi
+usb_bootcmd=run usb_init; run usb_set_bootargs; run usb_boot
+usb_device=0:1
+usb_init=run usb_scan
+usb_root=/dev/sda1
+usb_rootdelay=10
+usb_rootfstype=ext3
+usb_scan=usb_scan_done=0;for scan in $usb_scan_list; do run usb_scan_$scan; if test $usb_scan_done -eq 0 && ext2load usb $usb 0x800000 /boot/uImage 1; then usb_scan_done=1; echo "Found bootable drive on usb $usb"; setenv usb_device $usb; setenv usb_root /dev/$dev; fi; done
+usb_scan_1=usb=0:1 dev=sda1
+usb_scan_2=usb=1:1 dev=sdb1
+usb_scan_3=usb=2:1 dev=sdc1
+usb_scan_4=usb=3:1 dev=sdd1
+usb_scan_list=1 2 3 4
+usb_set_bootargs=setenv bootargs console=$console root=$usb_root rootdelay=$usb_rootdelay rootfstype=$usb_rootfstype $mtdparts $usb_custom_params
+x_bootargs=console=ttyS0,115200 mtdparts=orion_nand:1m(uboot),4m@1m(kernel),251m@5m(rootfs) rw
+x_bootargs_root=ubi.mtd=2 root=ubi0:rootfs rootfstype=ubifs
+x_bootcmd_kernel=nand read 0x80000 0x100000 0x400000
+x_bootcmd_usb=usb start
+
+Environment size: 2665/131068 bytes
+Netgear Stora> setenv bootargs $(console) root=/dev/sda1
+Netgear Stora> bootm 0x200000 0x800000
+## Booting kernel from Legacy Image at 00200000 ...
+   Image Name:   Debian kernel
+   Created:      2010-08-05  19:13:44 UTC
+   Image Type:   ARM Linux Kernel Image (uncompressed)
+   Data Size:    1445720 Bytes = 1.4 MiB
+   Load Address: 00008000
+   Entry Point:  00008000
+   Verifying Checksum ... OK
+## Loading init Ramdisk from Legacy Image at 00800000 ...
+   Image Name:   Debian ramdisk
+   Created:      2010-08-05  19:13:44 UTC
+   Image Type:   ARM Linux RAMDisk Image (gzip compressed)
+   Data Size:    5235959 Bytes = 5 MiB
+   Load Address: 00000000
+   Entry Point:  00000000
+   Verifying Checksum ... OK
+   Loading Kernel Image ... OK
+
+Starting kernel ...
+
+Uncompressing Linux... done, booting the kernel.
+
+Debian GNU/Linux 7 debian ttyS0
+
+debian login: root
+Password: 
+Last login: Wed Feb  5 12:33:56 PST 2014 from 192.168.0.11 on pts/0
+Linux debian 2.6.33-2-kirkwood #4 Thu Aug 5 18:42:13 UTC 2010 armv5tel
+
+The programs included with the Debian GNU/Linux system are free software;
+the exact distribution terms for each program are described in the
+individual files in /usr/share/doc/*/copyright.
+
+Debian GNU/Linux comes with ABSOLUTELY NO WARRANTY, to the extent
+permitted by applicable law.
+root@debian:~# apt-get update
+Get:1 http://security.debian.org wheezy/updates Release.gpg [836 B]
+Get:2 http://security.debian.org wheezy/updates Release [102 kB] 
+Get:3 http://ftp.us.debian.org wheezy Release.gpg [1672 B]       
+Get:4 http://security.debian.org wheezy/updates/main armel Packages [156 kB]
+Get:5 http://ftp.us.debian.org wheezy Release [168 kB]
+Get:6 http://security.debian.org wheezy/updates/contrib armel Packages [14 B]  
+Get:7 http://security.debian.org wheezy/updates/non-free armel Packages [14 B] 
+Get:8 http://security.debian.org wheezy/updates/contrib Translation-en [14 B]  
+Get:9 http://security.debian.org wheezy/updates/main Translation-en [90.2 kB]  
+Get:10 http://security.debian.org wheezy/updates/non-free Translation-en [14 B]
+Get:11 http://ftp.us.debian.org wheezy/main armel Packages [5713 kB]     
+Get:12 http://ftp.us.debian.org wheezy/main Translation-en [3849 kB]           
+Fetched 10.1 MB in 1min 57s (85.8 kB/s)                                        
+Reading package lists... Done
+root@debian:~# 
+
+
+
+
+
