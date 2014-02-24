@@ -1,72 +1,6 @@
 
-root@debian:/home/useruser/kwboot-tool# 
-root@debian:/home/useruser/kwboot-tool# ./uart.sh 
-Sending boot message. Please reboot the target...-
-Sending boot image...
-  0 % [......................................................................]
-  1 % [......................................................................]
-  3 % [......................................................................]
-  5 % [......................................................................]
-  6 % [......................................................................]
-  8 % [......................................................................]
- 10 % [......................................................................]
- 11 % [......................................................................]
- 13 % [......................................................................]
- 15 % [......................................................................]
- 17 % [......................................................................]
- 18 % [......................................................................]
- 20 % [......................................................................]
- 22 % [......................................................................]
- 23 % [......................................................................]
- 25 % [......................................................................]
- 27 % [......................................................................]
- 29 % [......................................................................]
- 30 % [......................................................................]
- 32 % [......................................................................]
- 34 % [......................................................................]
- 35 % [......................................................................]
- 37 % [......................................................................]
- 39 % [......................................................................]
- 41 % [......................................................................]
- 42 % [......................................................................]
- 44 % [......................................................................]
- 46 % [......................................................................]
- 47 % [......................................................................]
- 49 % [......................................................................]
- 51 % [......................................................................]
- 53 % [......................................................................]
- 54 % [......................................................................]
- 56 % [......................................................................]
- 58 % [......................................................................]
- 59 % [......................................................................]
- 61 % [......................................................................]
- 63 % [......................................................................]
- 64 % [......................................................................]
- 66 % [......................................................................]
- 68 % [......................................................................]
- 70 % [......................................................................]
- 71 % [......................................................................]
- 73 % [......................................................................]
- 75 % [......................................................................]
- 76 % [......................................................................]
- 78 % [......................................................................]
- 80 % [......................................................................]
- 82 % [......................................................................]
- 83 % [......................................................................]
- 85 % [......................................................................]
- 87 % [......................................................................]
- 88 % [......................................................................]
- 90 % [......................................................................]
- 92 % [......................................................................]
- 94 % [......................................................................]
- 95 % [......................................................................]
- 97 % [......................................................................]
- 99 % [........... .........................]
-[Type Ctrl-\ + c to quit]
 
-
-
-U-Boot 2013.10 (Feb 16 2014 - 12:24:16)-tld-2
+U-Boot 2013.10 (Feb 22 2014 - 15:26:05)-tld-2
 Netgear-MS2110
 
 SoC:   Kirkwood 88F6281_A1
@@ -80,147 +14,35 @@ Net:   egiga0
 PHY reset timed out
 88E1116 Initialized on egiga0
 Hit any key to stop autoboot:  0 
-Netgear Stora>   printenv
-arcNumber=2743
-baudrate=115200
-bootcmd=usb start; run force_rescue_bootcmd; run ubifs_bootcmd; run usb_bootcmd; usb stop; run rescue_bootcmd; run pogo_bootcmd; reset
-bootdelay=3
-console=ttyS0,115200
-ethact=egiga0
-ethaddr=c0:3f:0e:45:70:ec
-fileaddr=800000
-filesize=80000
-force_rescue=0
-force_rescue_bootcmd=if test $force_rescue -eq 1 || ext2load usb 0:1 0x1700000 /rescueme 1 || fatload usb 0:1 0x1700000 /rescueme.txt 1; then run rescue_bootcmd; fi
-ipaddr=192.168.2.234
-led_error=orange blinking
-led_exit=green off
-led_init=green blinking
-mainlineLinux=yes
-mtdids=nand0=orion_nand
-mtdparts=mtdparts=orion_nand:1M(u-boot),4M(uImage),32M(rootfs),-(data)
-partition=nand0,2
-pogo_bootcmd=if fsload uboot-original-mtd0.kwb; then go 0x800200; fi
-rescue_bootcmd=if test $rescue_installed -eq 1; then run rescue_set_bootargs; nand read.e 0x800000 0x100000 0x400000; bootm 0x800000; else run pogo_bootcmd; fi
-rescue_installed=0
-rescue_set_bootargs=setenv bootargs console=$console ubi.mtd=2 root=ubi0:rootfs ro rootfstype=ubifs $mtdparts $rescue_custom_params
-serverip=192.168.2.65
-stderr=serial
-stdin=serial
-stdout=serial
-ubifs_bootcmd=run ubifs_set_bootargs; if ubi part data && ubifsmount rootfs && ubifsload 0x800000 /boot/uImage && ubifsload 0x1100000 /boot/uInitrd; then bootm 0x800000 0x1100000; fi
-ubifs_mtd=3
-ubifs_set_bootargs=setenv bootargs console=$console ubi.mtd=$ubifs_mtd root=ubi0:rootfs rootfstype=ubifs $mtdparts $ubifs_custom_params
-usb_boot=mw 0x800000 0 1; ext2load usb $usb_device 0x800000 /boot/uImage; if ext2load usb $usb_device 0x1100000 /boot/uInitrd; then bootm 0x800000 0x1100000; else bootm 0x800000; fi
-usb_bootcmd=run usb_init; run usb_set_bootargs; run usb_boot
-usb_device=0:1
-usb_init=run usb_scan
-usb_root=/dev/sda1
-usb_rootdelay=10
-usb_rootfstype=ext3
-usb_scan=usb_scan_done=0;for scan in $usb_scan_list; do run usb_scan_$scan; if test $usb_scan_done -eq 0 && ext2load usb $usb 0x800000 /boot/uImage 1; then usb_scan_done=1; echo "Found bootable drive on usb $usb"; setenv usb_device $usb; setenv usb_root /dev/$dev; fi; done
-usb_scan_1=usb=0:1 dev=sda1
-usb_scan_2=usb=1:1 dev=sdb1
-usb_scan_3=usb=2:1 dev=sdc1
-usb_scan_4=usb=3:1 dev=sdd1
-usb_scan_list=1 2 3 4
-usb_set_bootargs=setenv bootargs console=$console root=$usb_root rootdelay=$usb_rootdelay rootfstype=$usb_rootfstype $mtdparts $usb_custom_params
-x_bootargs=console=ttyS0,115200 mtdparts=orion_nand:1m(uboot),4m@1m(kernel),251m@5m(rootfs) rw
-x_bootargs_root=ubi.mtd=2 root=ubi0:rootfs rootfstype=ubifs
-x_bootcmd_kernel=nand read 0x80000 0x100000 0x400000
-x_bootcmd_usb=usb start
+(Re)start USB...
+USB0:   USB EHCI 1.00
+scanning bus 0 for devices... 1 USB Device(s) found
+       scanning usb for storage devices... 0 Storage Device(s) found
+** Bad device usb 0 **
+** Bad device usb 0 **
+Wrong Image Format for bootm command
+ERROR: can't get kernel image!
 
-Environment size: 2664/131068 bytes
-Netgear Stora>  tftpboot 0x200000 uImage
-Using egiga0 device
-TFTP from server 192.168.2.65; our IP address is 192.168.2.234
-Filename 'uImage'.
-Load address: 0x200000
-Loading: #################################################################
-         ##################################
-         5.1 MiB/s
-done
-Bytes transferred = 1445784 (160f98 hex)
-Netgear Stora> tftpboot 0x800000 uInitrd
-Using egiga0 device
-TFTP from server 192.168.2.65; our IP address is 192.168.2.234
-Filename 'uInitrd'.
-Load address: 0x800000
-Loading: #################################################################
-         #################################################################
-         #################################################################
-         #################################################################
-         #################################################################
-         ################################
-         5.7 MiB/s
-done
-Bytes transferred = 5236023 (4fe537 hex)
-Netgear Stora> printenv
-arcNumber=2743
-baudrate=115200
-bootcmd=usb start; run force_rescue_bootcmd; run ubifs_bootcmd; run usb_bootcmd; usb stop; run rescue_bootcmd; run pogo_bootcmd; reset
-bootdelay=3
-console=ttyS0,115200
-ethact=egiga0
-ethaddr=c0:3f:0e:45:70:ec
-fileaddr=800000
-filesize=4fe537
-force_rescue=0
-force_rescue_bootcmd=if test $force_rescue -eq 1 || ext2load usb 0:1 0x1700000 /rescueme 1 || fatload usb 0:1 0x1700000 /rescueme.txt 1; then run rescue_bootcmd; fi
-ipaddr=192.168.2.234
-led_error=orange blinking
-led_exit=green off
-led_init=green blinking
-mainlineLinux=yes
-mtdids=nand0=orion_nand
-mtdparts=mtdparts=orion_nand:1M(u-boot),4M(uImage),32M(rootfs),-(data)
-partition=nand0,2
-pogo_bootcmd=if fsload uboot-original-mtd0.kwb; then go 0x800200; fi
-rescue_bootcmd=if test $rescue_installed -eq 1; then run rescue_set_bootargs; nand read.e 0x800000 0x100000 0x400000; bootm 0x800000; else run pogo_bootcmd; fi
-rescue_installed=0
-rescue_set_bootargs=setenv bootargs console=$console ubi.mtd=2 root=ubi0:rootfs ro rootfstype=ubifs $mtdparts $rescue_custom_params
-serverip=192.168.2.65
-stderr=serial
-stdin=serial
-stdout=serial
-ubifs_bootcmd=run ubifs_set_bootargs; if ubi part data && ubifsmount rootfs && ubifsload 0x800000 /boot/uImage && ubifsload 0x1100000 /boot/uInitrd; then bootm 0x800000 0x1100000; fi
-ubifs_mtd=3
-ubifs_set_bootargs=setenv bootargs console=$console ubi.mtd=$ubifs_mtd root=ubi0:rootfs rootfstype=ubifs $mtdparts $ubifs_custom_params
-usb_boot=mw 0x800000 0 1; ext2load usb $usb_device 0x800000 /boot/uImage; if ext2load usb $usb_device 0x1100000 /boot/uInitrd; then bootm 0x800000 0x1100000; else bootm 0x800000; fi
-usb_bootcmd=run usb_init; run usb_set_bootargs; run usb_boot
-usb_device=0:1
-usb_init=run usb_scan
-usb_root=/dev/sda1
-usb_rootdelay=10
-usb_rootfstype=ext3
-usb_scan=usb_scan_done=0;for scan in $usb_scan_list; do run usb_scan_$scan; if test $usb_scan_done -eq 0 && ext2load usb $usb 0x800000 /boot/uImage 1; then usb_scan_done=1; echo "Found bootable drive on usb $usb"; setenv usb_device $usb; setenv usb_root /dev/$dev; fi; done
-usb_scan_1=usb=0:1 dev=sda1
-usb_scan_2=usb=1:1 dev=sdb1
-usb_scan_3=usb=2:1 dev=sdc1
-usb_scan_4=usb=3:1 dev=sdd1
-usb_scan_list=1 2 3 4
-usb_set_bootargs=setenv bootargs console=$console root=$usb_root rootdelay=$usb_rootdelay rootfstype=$usb_rootfstype $mtdparts $usb_custom_params
-x_bootargs=console=ttyS0,115200 mtdparts=orion_nand:1m(uboot),4m@1m(kernel),251m@5m(rootfs) rw
-x_bootargs_root=ubi.mtd=2 root=ubi0:rootfs rootfstype=ubifs
-x_bootcmd_kernel=nand read 0x80000 0x100000 0x400000
-x_bootcmd_usb=usb start
-
-Environment size: 2665/131068 bytes
-Netgear Stora> setenv bootargs $(console) root=/dev/sda1
-Netgear Stora> bootm 0x200000 0x800000
-## Booting kernel from Legacy Image at 00200000 ...
-   Image Name:   Debian kernel
-   Created:      2010-08-05  19:13:44 UTC
+Reset IDE: Bus 0: OK Bus 1: not available  
+  Device 0: Model: ST3160318AS  Firm: CC38 Ser#: 9VM8Y5Z4
+            Type: Hard Disk
+            Supports 48-bit addressing
+            Capacity: 152627.8 MB = 149.0 GB (312581808 x 512)
+1927896 bytes read in 374 ms (4.9 MiB/s)
+7901476 bytes read in 1336 ms (5.6 MiB/s)
+## Booting kernel from Legacy Image at 00800000 ...
+   Image Name:   Linux-3.10.26-stora
+   Created:      2014-02-17   7:59:46 UTC
    Image Type:   ARM Linux Kernel Image (uncompressed)
-   Data Size:    1445720 Bytes = 1.4 MiB
+   Data Size:    1927832 Bytes = 1.8 MiB
    Load Address: 00008000
    Entry Point:  00008000
    Verifying Checksum ... OK
-## Loading init Ramdisk from Legacy Image at 00800000 ...
-   Image Name:   Debian ramdisk
-   Created:      2010-08-05  19:13:44 UTC
+## Loading init Ramdisk from Legacy Image at 01100000 ...
+   Image Name:   initramfs-3.10.26-stora
+   Created:      2014-02-17   8:00:07 UTC
    Image Type:   ARM Linux RAMDisk Image (gzip compressed)
-   Data Size:    5235959 Bytes = 5 MiB
+   Data Size:    7901412 Bytes = 7.5 MiB
    Load Address: 00000000
    Entry Point:  00000000
    Verifying Checksum ... OK
@@ -229,38 +51,248 @@ Netgear Stora> bootm 0x200000 0x800000
 Starting kernel ...
 
 Uncompressing Linux... done, booting the kernel.
+[    0.000000] Booting Linux on physical CPU 0x0
+[    0.000000] Initializing cgroup subsys cpuset
+[    0.000000] Initializing cgroup subsys cpu
+[    0.000000] Initializing cgroup subsys cpuacct
+[    0.000000] Linux version 3.10.26-stora (root@Brick) (gcc version 4.7.3 (Ubuntu/Linaro 4.7.3-1ubuntu1) ) #2 Tue Jan 14 00:11:18 MSK 2014
+[    0.000000] CPU: Feroceon 88FR131 [56251311] revision 1 (ARMv5TE), cr=00053977
+[    0.000000] CPU: VIVT data cache, VIVT instruction cache
+[    0.000000] Machine: Netgear MS2110
+[    0.000000] Memory policy: ECC disabled, Data cache writeback
+[    0.000000] Built 1 zonelists in Zone order, mobility grouping on.  Total pages: 32512
+[    0.000000] Kernel command line: console=ttyS0,115200 root=/dev/sda1 rootdelay=10 mtdparts=orion_nand:1M(u-boot),512K(uboot_env),512K(key_store),512K(info),10M(etc),10M(kernel_1),48896K(rootfs1),10M(kernel_2),-(rootfs2)
+[    0.000000] PID hash table entries: 512 (order: -1, 2048 bytes)
+[    0.000000] Dentry cache hash table entries: 16384 (order: 4, 65536 bytes)
+[    0.000000] Inode-cache hash table entries: 8192 (order: 3, 32768 bytes)
+[    0.000000] allocated 262144 bytes of page_cgroup
+[    0.000000] please try 'cgroup_disable=memory' option if you don't want memory cgroups
+[    0.000000] Memory: 128MB = 128MB total
+[    0.000000] Memory: 116080k/116080k available, 14992k reserved, 0K highmem
+[    0.000000] Virtual kernel memory layout:
+[    0.000000]     vector  : 0xffff0000 - 0xffff1000   (   4 kB)
+[    0.000000]     fixmap  : 0xfff00000 - 0xfffe0000   ( 896 kB)
+[    0.000000]     vmalloc : 0xc8800000 - 0xff000000   ( 872 MB)
+[    0.000000]     lowmem  : 0xc0000000 - 0xc8000000   ( 128 MB)
+[    0.000000]     modules : 0xbf000000 - 0xc0000000   (  16 MB)
+[    0.000000]       .text : 0xc0008000 - 0xc04d20d8   (4905 kB)
+[    0.000000]       .init : 0xc04d3000 - 0xc050181c   ( 187 kB)
+[    0.000000]       .data : 0xc0502000 - 0xc054f5c0   ( 310 kB)
+[    0.000000]        .bss : 0xc054f5c0 - 0xc05b5fa4   ( 411 kB)
+[    0.000000] NR_IRQS:114
+[    0.000000] sched_clock: 32 bits at 200MHz, resolution 5ns, wraps every 21474ms
+[    0.000000] Console: colour dummy device 80x30
+[   12.276838] Calibrating delay loop... 990.41 BogoMIPS (lpj=4952064)
+[   12.316624] pid_max: default: 32768 minimum: 301
+[   12.316738] Security Framework initialized
+[   12.316765] Yama: becoming mindful.
+[   12.316844] Mount-cache hash table entries: 512
+[   12.317500] Initializing cgroup subsys memory
+[   12.317567] Initializing cgroup subsys devices
+[   12.317584] Initializing cgroup subsys freezer
+[   12.317595] Initializing cgroup subsys net_cls
+[   12.317605] Initializing cgroup subsys blkio
+[   12.317615] Initializing cgroup subsys perf_event
+[   12.317723] CPU: Testing write buffer coherency: ok
+[   12.318132] Setting up static identity map for 0xc0374648 - 0xc0374684
+[   12.319954] devtmpfs: initialized
+[   12.322389] pinctrl core: initialized pinctrl subsystem
+[   12.322796] regulator-dummy: no parameters
+[   12.323129] NET: Registered protocol family 16
+[   12.323579] DMA: preallocated 256 KiB pool for atomic coherent allocations
+[   12.324486] Kirkwood: MV88F6281-A1, TCLK=200000000.
+[   12.324520] Feroceon L2: Enabling L2
+[   12.324566] Feroceon L2: Cache support initialised.
+[   12.326048] Kirkwood PCIe port 0: link down
+[   12.326060] PCI: bus0 uses PCIe port 0
+[   12.326234] PCI host bridge to bus 0000:00
+[   12.326256] pci_bus 0000:00: root bus resource [mem 0xe0000000-0xe7ffffff]
+[   12.326270] pci_bus 0000:00: root bus resource [io  0x1000-0xffff]
+[   12.326283] pci_bus 0000:00: No busn resource found for root bus, will use [bus 00-ff]
+[   12.326562] PCI: bus0: Fast back to back transfers disabled
+[   12.329118] bio: create slab <bio-0> at 0
+[   12.329662] vgaarb: loaded
+[   12.329838] usbcore: registered new interface driver usbfs
+[   12.329899] usbcore: registered new interface driver hub
+[   12.330010] usbcore: registered new device driver usb
+[   12.330718] Switching to clocksource orion_clocksource
+[   12.348134] NET: Registered protocol family 2
+[   12.348832] TCP established hash table entries: 1024 (order: 1, 8192 bytes)
+[   12.348873] TCP bind hash table entries: 1024 (order: 0, 4096 bytes)
+[   12.348896] TCP: Hash tables configured (established 1024 bind 1024)
+[   12.348962] TCP: reno registered
+[   12.348976] UDP hash table entries: 256 (order: 0, 4096 bytes)
+[   12.349002] UDP-Lite hash table entries: 256 (order: 0, 4096 bytes)
+[   12.349227] NET: Registered protocol family 1
+[   12.349482] Unpacking initramfs...
+[   13.196483] Freeing initrd memory: 7712K (c1101000 - c1889000)
+[   13.196565] NetWinder Floating Point Emulator V0.97 (double precision)
+[   13.197265] audit: initializing netlink socket (disabled)
+[   13.197313] type=2000 audit(0.910:1): initialized
+[   13.198322] VFS: Disk quotas dquot_6.5.2
+[   13.198379] Dquot-cache hash table entries: 1024 (order 0, 4096 bytes)
+[   13.198540] jffs2: version 2.2. (NAND) (SUMMARY)  Â© 2001-2006 Red Hat, Inc.
+[   13.198778] msgmni has been set to 241
+[   13.200906] alg: No test for stdrng (krng)
+[   13.201004] Block layer SCSI generic (bsg) driver version 0.4 loaded (major 252)
+[   13.201145] io scheduler noop registered
+[   13.201156] io scheduler deadline registered
+[   13.201180] io scheduler cfq registered (default)
+[   13.201338] mv_xor mv_xor.0: Marvell shared XOR driver
+[   13.240807] mv_xor mv_xor.0: Marvell XOR: ( xor cpy )
+[   13.280808] mv_xor mv_xor.0: Marvell XOR: ( xor fill cpy )
+[   13.280966] mv_xor mv_xor.1: Marvell shared XOR driver
+[   13.320801] mv_xor mv_xor.1: Marvell XOR: ( xor cpy )
+[   13.360802] mv_xor mv_xor.1: Marvell XOR: ( xor fill cpy )
+[   13.361149] Serial: 8250/16550 driver, 2 ports, IRQ sharing disabled
+[   13.381874] serial8250.0: ttyS0 at MMIO 0xf1012000 (irq = 33) is a 16550A
+[   13.899682] console [ttyS0] enabled
+[   13.904406] NAND device: Manufacturer ID: 0xec, Chip ID: 0xda (Samsung NAND 256MiB 3,3V 8-bit), 256MiB, page size: 2048, OOB size: 64
+[   13.916491] Scanning device for bad blocks
+[   13.925606] Bad eraseblock 66 at 0x000000840000
+[   13.946838] Bad eraseblock 289 at 0x000002420000
+[   14.052683] Bad eraseblock 1640 at 0x00000cd00000
+[   14.087915] 9 cmdlinepart partitions found on MTD device orion_nand
+[   14.094228] Creating 9 MTD partitions on "orion_nand":
+[   14.099394] 0x000000000000-0x000000100000 : "u-boot"
+[   14.105403] 0x000000100000-0x000000180000 : "uboot_env"
+[   14.111627] 0x000000180000-0x000000200000 : "key_store"
+[   14.117810] 0x000000200000-0x000000280000 : "info"
+[   14.123603] 0x000000280000-0x000000c80000 : "etc"
+[   14.129293] 0x000000c80000-0x000001680000 : "kernel_1"
+[   14.135384] 0x000001680000-0x000004640000 : "rootfs1"
+[   14.141423] 0x000004640000-0x000005040000 : "kernel_2"
+[   14.147489] 0x000005040000-0x000010000000 : "rootfs2"
+[   14.153893] ehci_hcd: USB 2.0 'Enhanced' Host Controller (EHCI) Driver
+[   14.160449] ehci-pci: EHCI PCI platform driver
+[   14.164992] ehci-orion: EHCI orion driver
+[   14.169096] orion-ehci orion-ehci.0: EHCI Host Controller
+[   14.174561] orion-ehci orion-ehci.0: new USB bus registered, assigned bus number 1
+[   14.182309] orion-ehci orion-ehci.0: irq 19, io mem 0xf1050000
+[   14.200781] orion-ehci orion-ehci.0: USB 2.0 started, EHCI 1.00
+[   14.206810] usb usb1: New USB device found, idVendor=1d6b, idProduct=0002
+[   14.213651] usb usb1: New USB device strings: Mfr=3, Product=2, SerialNumber=1
+[   14.220925] usb usb1: Product: EHCI Host Controller
+[   14.225827] usb usb1: Manufacturer: Linux 3.10.26-stora ehci_hcd
+[   14.231874] usb usb1: SerialNumber: orion-ehci.0
+[   14.237086] hub 1-0:1.0: USB hub found
+[   14.240899] hub 1-0:1.0: 1 port detected
+[   14.245537] mousedev: PS/2 mouse device common for all mice
+[   15.260778] rtc-mv rtc-mv: internal RTC not ticking
+[   15.265792] i2c /dev entries driver
+[   15.270047] cpuidle: using governor ladder
+[   15.274186] cpuidle: using governor menu
+[   15.278335] leds-gpio leds-gpio: pins are not configured from the driver
+[   15.285657] drop_monitor: Initializing network drop monitor service
+[   15.292313] TCP: cubic registered
+[   15.295695] NET: Registered protocol family 10
+[   15.300912] mip6: Mobile IPv6
+[   15.303899] NET: Registered protocol family 17
+[   15.308960] registered taskstats version 1
+[   15.314052] drivers/rtc/hctosys.c: unable to open rtc device (rtc0)
+[   15.321320] Freeing unused kernel memory: 184K (c04d3000 - c0501000)
+Loading, please wait...
+[   15.411443] udevd[48]: starting version 175
+[   15.510188] mv643xx_eth: MV-643xx 10/100/1000 ethernet driver version 1.4
+[   15.627806] libphy: PHY orion-mdio-mii:08 not found
+[   15.650881] platform mv643xx_eth_port.0: Driver mv643xx_eth_port requests probe deferral
+[   15.664099] SCSI subsystem initialized
+[   15.678614] libphy: orion_mdio_bus: probed
+[   15.719619] mv643xx_eth_port mv643xx_eth_port.0 eth0: port 0 with MAC address c0:3f:0e:45:70:ec
+[   15.769588] sata_mv sata_mv.0: cannot get optional clkdev
+[   15.800027] sata_mv sata_mv.0: slots 32 ports 2
+[   15.832921] scsi0 : sata_mv
+[   15.841285] scsi1 : sata_mv
+[   15.844425] ata1: SATA max UDMA/133 irq 21
+[   15.848541] ata2: SATA max UDMA/133 irq 21
+[   16.360900] ata1: SATA link up 3.0 Gbps (SStatus 123 SControl F300)
+[   16.400818] ata1.00: ATA-8: ST3160318AS, CC38, max UDMA/133
+[   16.406422] ata1.00: 312581808 sectors, multi 0: LBA48 NCQ (depth 31/32)
+[   16.470818] ata1.00: configured for UDMA/133
+[   16.475542] scsi 0:0:0:0: Direct-Access     ATA      ST3160318AS      CC38 PQ: 0 ANSI: 5
+[   16.830780] ata2: SATA link down (SStatus 0 SControl F300)
+[   16.862219] sd 0:0:0:0: [sda] 312581808 512-byte logical blocks: (160 GB/149 GiB)
+[   16.871103] sd 0:0:0:0: [sda] Write Protect is off
+[   16.876055] sd 0:0:0:0: [sda] Write cache: enabled, read cache: enabled, doesn't support DPO or FUA
+[   16.893181]  sda: sda1
+[   16.897282] sd 0:0:0:0: [sda] Attached SCSI disk
+[   16.913825] sd 0:0:0:0: Attached scsi generic sg0 type 0
+Begin: Loading essential drivers ... done.
+Begin: Running /scripts/init-premount ... done.
+Begin: Mounting root file system ... Begin: Running /scripts/local-top ... done.
+Begin: Running /scripts/local-premount ... done.
+[   27.286996] EXT4-fs (sda1): INFO: recovery required on readonly filesystem
+[   27.293961] EXT4-fs (sda1): write access will be enabled during recovery
+[   27.553249] EXT4-fs (sda1): recovery complete
+[   27.571151] EXT4-fs (sda1): mounted filesystem with ordered data mode. Opts: (null)
+Begin: Running /scripts/local-bottom ... done.
+done.
+Begin: Running /scripts/init-bottom ... done.
+INIT: version 2.88 booting
+[info] Using makefile-style concurrent boot in runlevel S.
+[....] Starting the hotplug events dispatcher: udevd[   29.648639] udevd[236]: starting version 175
+. ok 
+[ ok ] Synthesizing the initial hotplug events...done.
+[ ok ] Waiting for /dev to be fully populated...done.
+[ ok ] Activating swap...done.
+[   31.404965] EXT4-fs (sda1): re-mounted. Opts: (null)
+[....] Checking root file system...fsck from util-linux 2.20.1
+rootfs: clean, 30976/9773056 files, 910935/39072000 blocks
+done.
+[   31.725841] EXT4-fs (sda1): re-mounted. Opts: errors=remount-ro
+[ ok ] Loading kernel modules...done.
+[ ok ] Cleaning up temporary files... /tmp /lib/init/rw.
+[ ok ] Activating lvm and md swap...done.
+[....] Checking file systems...fsck from util-linux 2.20.1
+done.
+[ ok ] Mounting local filesystems...done.
+[ ok ] Activating swapfile swap...done.
+[ ok ] Cleaning up temporary files....
+[ ok ] Setting kernel variables ...done.
+[....] Configuring network interfaces...Internet Systems Consortium DHCP Client 4.2.2
+Copyright 2004-2011 Internet Systems Consortium.
+All rights reserved.
+For info, please visit https://www.isc.org/software/dhcp/
+
+[   36.672336] mv643xx_eth_port mv643xx_eth_port.0 eth0: link down
+[   36.678418] IPv6: ADDRCONF(NETDEV_UP): eth0: link is not ready
+Listening on LPF/eth0/c0:3f:0e:45:70:ec
+Sending on   LPF/eth0/c0:3f:0e:45:70:ec
+Sending on   Socket/fallback
+DHCPREQUEST on eth0 to 255.255.255.255 port 67
+DHCPREQUEST on eth0 to 255.255.255.255 port 67
+[   39.764282] mv643xx_eth_port mv643xx_eth_port.0 eth0: link up, 1000 Mb/s, full duplex, flow control disabled
+[   39.774209] IPv6: ADDRCONF(NETDEV_CHANGE): eth0: link becomes ready
+DHCPDISCOVER on eth0 to 255.255.255.255 port 67 interval 6
+DHCPREQUEST on eth0 to 255.255.255.255 port 67
+DHCPOFFER from 192.168.2.10
+DHCPACK from 192.168.2.10
+bound to 192.168.2.139 -- renewal in 338534 seconds.
+done.
+[ ok ] Starting rpcbind daemon....
+[ ok ] Starting NFS common utilities: statd.
+[ ok ] Cleaning up temporary files....
+INIT: Entering runlevel: 2
+[info] Using makefile-style concurrent boot in runlevel 2.
+[....] Starting web server: apache2[Wed Dec 31 16:00:39 1969] [error] (EAI 2)Name or service not known: Could not resolve host name ... -- ignoring!
+apache2: Could not reliably determine the server's fully qualified domain name, using 192.168.2.139 for ServerName
+. ok 
+[....] Starting busybox' klogd implementation : klogdStarting /sbin/klogd...
+[....] Starting busybox' syslogd implementation : syslogdStarting /sbin/syslogd...
+1707 (syslogd)
+. ok 
+1677 (klogd)
+. ok 
+[ ok ] Starting system message bus: dbus.
+[ ok ] Starting Avahi mDNS/DNS-SD Daemon: avahi-daemon.
+[ ok ] Starting NFS common utilities: statd.
+[ ok ] Starting MySQL database server: mysqld[....] Starting NTP server: ntpd.
+[ ok ..] Starting rpcbind daemon...[....] Already running..
+[warn] Not starting NFS kernel daemon: no exports. ... (warning).
+[ ok ..] Starting OpenBSD Secure Shell server: sshd.
+[FAIL. . . . . . . . . . failed!
+[FAIL] startpar: service(s) returned failure: mysql ... failed!
 
 Debian GNU/Linux 7 debian ttyS0
 
-debian login: root
-Password: 
-Last login: Wed Feb  5 12:33:56 PST 2014 from 192.168.0.11 on pts/0
-Linux debian 2.6.33-2-kirkwood #4 Thu Aug 5 18:42:13 UTC 2010 armv5tel
-
-The programs included with the Debian GNU/Linux system are free software;
-the exact distribution terms for each program are described in the
-individual files in /usr/share/doc/*/copyright.
-
-Debian GNU/Linux comes with ABSOLUTELY NO WARRANTY, to the extent
-permitted by applicable law.
-root@debian:~# apt-get update
-Get:1 http://security.debian.org wheezy/updates Release.gpg [836 B]
-Get:2 http://security.debian.org wheezy/updates Release [102 kB] 
-Get:3 http://ftp.us.debian.org wheezy Release.gpg [1672 B]       
-Get:4 http://security.debian.org wheezy/updates/main armel Packages [156 kB]
-Get:5 http://ftp.us.debian.org wheezy Release [168 kB]
-Get:6 http://security.debian.org wheezy/updates/contrib armel Packages [14 B]  
-Get:7 http://security.debian.org wheezy/updates/non-free armel Packages [14 B] 
-Get:8 http://security.debian.org wheezy/updates/contrib Translation-en [14 B]  
-Get:9 http://security.debian.org wheezy/updates/main Translation-en [90.2 kB]  
-Get:10 http://security.debian.org wheezy/updates/non-free Translation-en [14 B]
-Get:11 http://ftp.us.debian.org wheezy/main armel Packages [5713 kB]     
-Get:12 http://ftp.us.debian.org wheezy/main Translation-en [3849 kB]           
-Fetched 10.1 MB in 1min 57s (85.8 kB/s)                                        
-Reading package lists... Done
-root@debian:~# 
-
-
-
-
-
+debian login: 
